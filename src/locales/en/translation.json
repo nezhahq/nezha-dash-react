@@ -1,0 +1,57 @@
+{
+  "nezha": "Nezha Monitoring",
+  "overview": "Overview",
+  "whereTheTimeIs": "Where the time is",
+  "info": {
+    "websocketConnecting": "WebSocket connecting",
+    "websocketConnected": "WebSocket connected",
+    "websocketDisconnected": "WebSocket disconnected",
+    "processing": "Processing..."
+  },
+  "serverOverview": {
+    "totalServers": "Total Servers",
+    "onlineServers": "Online Servers",
+    "offlineServers": "Offline Servers",
+    "totalBandwidth": "Total Bandwidth"
+  },
+  "serverCard": {
+    "mem": "MEM",
+    "stg": "STG",
+    "upload": "Upload",
+    "download": "Download"
+  },
+  "serverDetail": {
+    "status": "Status",
+    "online": "Online",
+    "offline": "Offline",
+    "unknown": "Unknown",
+    "uptime": "Uptime",
+    "version": "Version",
+    "arch": "Arch",
+    "mem": "Mem",
+    "disk": "Disk",
+    "region": "Region",
+    "system": "System"
+  },
+  "serverDetailChart": {
+    "process": "Process",
+    "disk": "Disk",
+    "mem": "Mem",
+    "swap": "Swap",
+    "upload": "Upload",
+    "download": "Download"
+  },
+  "footer": {
+    "themeBy": "Theme by "
+  },
+  "language": {
+    "zh-CN": "简体中文",
+    "zh-TW": "繁體中文",
+    "en": "English"
+  },
+  "theme": {
+    "light": "Light",
+    "dark": "Dark",
+    "system": "System"
+  }
+}

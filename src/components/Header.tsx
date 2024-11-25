@@ -1,4 +1,3 @@
-// import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { ModeToggle } from "@/components/ThemeSwitcher";
 import { Separator } from "@/components/ui/separator";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -6,8 +5,11 @@ import { fetchLoginUser } from "@/lib/nezha-api";
 import { useQuery } from "@tanstack/react-query";
 import { DateTime } from "luxon";
 import { useEffect, useRef, useState } from "react";
+import { LanguageSwitcher } from "./LanguageSwitcher";
+import { useTranslation } from "react-i18next";
 
 function Header() {
+  const { t } = useTranslation();
   return (
     <div className="mx-auto w-full max-w-5xl">
       <section className="flex items-center justify-between">
@@ -27,12 +29,12 @@ function Header() {
             className="mx-2 hidden h-4 w-[1px] md:block"
           />
           <p className="hidden text-sm font-medium opacity-40 md:block">
-            哪吒监控
+            {t("nezha")}
           </p>
         </section>
         <section className="flex items-center gap-2">
           <DashboardLink />
-          {/* <LanguageSwitcher /> */}
+          <LanguageSwitcher />
           <ModeToggle />
         </section>
       </section>
@@ -80,6 +82,7 @@ const useInterval = (callback: () => void, delay: number | null) => {
   }, [delay]);
 };
 function Overview() {
+  const { t } = useTranslation();
   const [mouted, setMounted] = useState(false);
   useEffect(() => {
     setMounted(true);
@@ -94,9 +97,9 @@ function Overview() {
   }, 1000);
   return (
     <section className={"mt-10 flex flex-col md:mt-16"}>
-      <p className="text-base font-semibold">👋 Overview</p>
+      <p className="text-base font-semibold">👋 {t("overview")}</p>
       <div className="flex items-center gap-1.5">
-        <p className="text-sm font-medium opacity-50">where the time is</p>
+        <p className="text-sm font-medium opacity-50">{t("whereTheTimeIs")}</p>
         {mouted ? (
           <p className="text-sm font-medium">{timeString}</p>
         ) : (

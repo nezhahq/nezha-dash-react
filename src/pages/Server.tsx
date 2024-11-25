@@ -9,18 +9,18 @@ import { fetchServerGroup } from "@/lib/nezha-api";
 import GroupSwitch from "@/components/GroupSwitch";
 import { ServerGroup } from "@/types/nezha-api";
 import { useWebSocketContext } from "@/hooks/use-websocket-context";
+import { useTranslation } from "react-i18next";
 
 export default function Servers() {
+  const { t } = useTranslation();
   const { data: groupData } = useQuery({
     queryKey: ["server-group"],
     queryFn: () => fetchServerGroup(),
   });
   const { lastMessage, readyState } = useWebSocketContext();
 
-  // 添加分组状态
   const [currentGroup, setCurrentGroup] = useState<string>("All");
 
-  // 获取所有分组名称
   const groupTabs = [
     "All",
     ...(groupData?.data?.map((item: ServerGroup) => item.group.name) || []),
@@ -28,20 +28,18 @@ export default function Servers() {
 
   useEffect(() => {
     if (readyState == 1) {
-      toast.success("WebSocket connected");
+      toast.success(t("info.websocketConnected"));
     }
   }, [readyState]);
 
-  // 检查连接状态
   if (readyState !== 1) {
     return (
       <div className="flex flex-col items-center justify-center ">
-        <p className="font-semibold text-sm">connecting...</p>
+        <p className="font-semibold text-sm">{t("info.websocketConnecting")}</p>
       </div>
     );
   }
 
-  // 解析消息
   const nezhaWsData = lastMessage
     ? (JSON.parse(lastMessage.data) as NezhaAPIResponse)
     : null;
@@ -49,12 +47,11 @@ export default function Servers() {
   if (!nezhaWsData) {
     return (
       <div className="flex flex-col items-center justify-center ">
-        <p className="font-semibold text-sm">processing...</p>
+        <p className="font-semibold text-sm">{t("info.processing")}</p>
       </div>
     );
   }
 
-  // 计算所有服务器的统计数据（用于 Overview）
   const totalServers = nezhaWsData?.servers?.length || 0;
   const onlineServers =
     nezhaWsData?.servers?.filter((server) => formatNezhaInfo(server).online)
@@ -73,7 +70,6 @@ export default function Servers() {
       0,
     ) || 0;
 
-  // 根据当前选中的分组筛选服务器（用于显示列表）
   const filteredServers =
     nezhaWsData?.servers?.filter((server) => {
       if (currentGroup === "All") return true;
